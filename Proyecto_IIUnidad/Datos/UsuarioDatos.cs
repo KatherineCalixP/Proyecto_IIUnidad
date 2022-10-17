@@ -11,26 +11,22 @@ namespace Datos
 {
     public class UsuarioDatos
     {
-        public async Task<bool> LoginAsync(string codigo,string clave)
+        public async Task<bool> LoginAsync(string codigo, string clave)
         {
-            bool valido=false;
-
+            bool valido = false;
             try
             {
-                //va a permitir consultar el usuario y la clave
-                string sql = "SELECT 1 FROM Usuario WHERE Codigo=@Codigo AND Clave=@Clave;";
-               //conexion y using nos ayuda a cerrarla
-                using(MySqlConnection _conexion = new MySqlConnection(CadenaConexion.Cadena))
+                string sql = "SELECT 1 FROM usuario WHERE Codigo=@Codigo AND Clave=@Clave;";
+
+                using (MySqlConnection _conexion = new MySqlConnection(CadenaConexion.Cadena))
                 {
                     await _conexion.OpenAsync();
-                    using(MySqlCommand comando = new MySqlCommand(sql, _conexion))
+                    using (MySqlCommand comando = new MySqlCommand(sql, _conexion))
                     {
                         comando.CommandType = System.Data.CommandType.Text;
-                        comando.Parameters.Add("@Codigo",MySqlDbType.VarChar,20).Value = codigo;
+                        comando.Parameters.Add("@Codigo", MySqlDbType.VarChar, 20).Value = codigo;
                         comando.Parameters.Add("@Clave", MySqlDbType.VarChar, 120).Value = clave;
-
-                        //ejecutar
-                       valido =Convert.ToBoolean(  await comando.ExecuteScalarAsync());
+                        valido = Convert.ToBoolean(await comando.ExecuteScalarAsync());
                     }
                 }
             }
