@@ -42,7 +42,7 @@ namespace Datos
             DataTable dt = new DataTable();
             try
             {
-                string sql = "SELEC * FROM Usuario";
+                string sql = "SELECT * FROM Usuario;";
 
                 using (MySqlConnection _conexion = new MySqlConnection(CadenaConexion.Cadena))
                 {
@@ -50,21 +50,18 @@ namespace Datos
                     using (MySqlCommand comando = new MySqlCommand(sql, _conexion))
                     {
                         comando.CommandType = System.Data.CommandType.Text;
-
                         //ejecutar           (CASTEAR       )Es como el convert
-                        MySqlDataReader dr =(MySqlDataReader) await comando.ExecuteReaderAsync();
+                        MySqlDataReader dr = (MySqlDataReader)await comando.ExecuteReaderAsync();
                         dt.Load(dr);
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
             }
             return dt;
         }
-
+        
         //metodo para asinar nuevo usuario
         public async Task<bool> InsertarAsync(Usuario usuario)
         {

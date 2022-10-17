@@ -42,9 +42,9 @@ namespace Vista
 
             if (valido)
             {
-               /* Menu formulario = new Menu();
-                Hide();
-                formulario.Show();*/
+                Menu formulario = new Menu();
+                Hide();//para ocultar el formulario
+                formulario.Show();//mostrar siguiente formulario
             }
             else
             {
@@ -52,6 +52,11 @@ namespace Vista
             }
 
 
+        }
+
+        private void Cancelarbutton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

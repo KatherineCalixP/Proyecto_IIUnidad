@@ -36,7 +36,9 @@
             this.Aceptarbutton = new System.Windows.Forms.Button();
             this.Cancelarbutton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ClaveTextBox
@@ -74,32 +76,54 @@
             // 
             // Aceptarbutton
             // 
+            this.Aceptarbutton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Aceptarbutton.Image = global::Vista.Properties.Resources.aceptar;
+            this.Aceptarbutton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Aceptarbutton.Location = new System.Drawing.Point(79, 130);
             this.Aceptarbutton.Name = "Aceptarbutton";
-            this.Aceptarbutton.Size = new System.Drawing.Size(75, 23);
+            this.Aceptarbutton.Size = new System.Drawing.Size(91, 38);
             this.Aceptarbutton.TabIndex = 8;
             this.Aceptarbutton.Text = "Aceptar";
+            this.Aceptarbutton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Aceptarbutton.UseVisualStyleBackColor = true;
             this.Aceptarbutton.Click += new System.EventHandler(this.Aceptarbutton_ClickAsync);
             // 
             // Cancelarbutton
             // 
+            this.Cancelarbutton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Cancelarbutton.Image = global::Vista.Properties.Resources.cancelar;
+            this.Cancelarbutton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Cancelarbutton.Location = new System.Drawing.Point(212, 130);
             this.Cancelarbutton.Name = "Cancelarbutton";
-            this.Cancelarbutton.Size = new System.Drawing.Size(75, 23);
+            this.Cancelarbutton.Size = new System.Drawing.Size(97, 38);
             this.Cancelarbutton.TabIndex = 9;
             this.Cancelarbutton.Text = "Cancelar";
+            this.Cancelarbutton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Cancelarbutton.UseVisualStyleBackColor = true;
+            this.Cancelarbutton.Click += new System.EventHandler(this.Cancelarbutton_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Vista.Properties.Resources.usuario__2_;
+            this.pictureBox1.Location = new System.Drawing.Point(363, 22);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(125, 110);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // Login
             // 
+            this.AcceptButton = this.Aceptarbutton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 196);
+            this.CancelButton = this.Cancelarbutton;
+            this.ClientSize = new System.Drawing.Size(514, 196);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Cancelarbutton);
             this.Controls.Add(this.Aceptarbutton);
             this.Controls.Add(this.ClaveTextBox);
@@ -109,6 +133,7 @@
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +148,6 @@
         private Button Aceptarbutton;
         private Button Cancelarbutton;
         private ErrorProvider errorProvider1;
+        private PictureBox pictureBox1;
     }
 }
