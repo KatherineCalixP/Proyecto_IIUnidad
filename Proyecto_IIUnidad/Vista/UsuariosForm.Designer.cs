@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CancelarButton = new System.Windows.Forms.Button();
             this.EliminarButton = new System.Windows.Forms.Button();
             this.GuardarButton = new System.Windows.Forms.Button();
@@ -46,7 +47,9 @@
             this.CodigoTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.UsuariosdataGridView = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosdataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // CancelarButton
@@ -76,6 +79,7 @@
             this.GuardarButton.TabIndex = 32;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // ModificarButton
             // 
@@ -85,6 +89,7 @@
             this.ModificarButton.TabIndex = 31;
             this.ModificarButton.Text = "Modificar";
             this.ModificarButton.UseVisualStyleBackColor = true;
+            this.ModificarButton.Click += new System.EventHandler(this.ModificarButton_Click);
             // 
             // NuevoButton
             // 
@@ -214,6 +219,10 @@
             this.UsuariosdataGridView.Size = new System.Drawing.Size(842, 146);
             this.UsuariosdataGridView.TabIndex = 35;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // UsuariosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -242,6 +251,7 @@
             this.Text = "UsuariosForm";
             this.Load += new System.EventHandler(this.UsuariosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosdataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,5 +277,6 @@
         private TextBox CodigoTextBox;
         private Label label1;
         private DataGridView UsuariosdataGridView;
+        private ErrorProvider errorProvider1;
     }
 }

@@ -14,6 +14,6 @@ namespace Entidades
         public string Clave { get; set; }
         public string? Correo { get; set; }
         public string Rol { get; set; }
-        public string EstActivo { get; set; }
+        public bool EstActivo { get; set; }
     }
 }

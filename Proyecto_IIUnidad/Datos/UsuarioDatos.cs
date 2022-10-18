@@ -68,9 +68,8 @@ namespace Datos
             bool inserto = false;
             try
             {
-                //va a permitir consultar el usuario y la clave
                 string sql = "INSERT INTO usuario VALUES (@Codigo, @Nombre, @Clave, @Correo, @Rol, @EstActivo);";
-                //conexion y using nos ayuda a cerrarla
+
                 using (MySqlConnection _conexion = new MySqlConnection(CadenaConexion.Cadena))
                 {
                     await _conexion.OpenAsync();
@@ -82,17 +81,15 @@ namespace Datos
                         comando.Parameters.Add("@Clave", MySqlDbType.VarChar, 120).Value = usuario.Clave;
                         comando.Parameters.Add("@Correo", MySqlDbType.VarChar, 45).Value = usuario.Correo;
                         comando.Parameters.Add("@Rol", MySqlDbType.VarChar, 20).Value = usuario.Rol;
-                        comando.Parameters.Add("@EstActivo", MySqlDbType.TinyText).Value = usuario.EstActivo;
+                        comando.Parameters.Add("@EstActivo", MySqlDbType.Bit).Value = usuario.EstActivo;
 
-                        //ejecutar
                         await comando.ExecuteNonQueryAsync();
-                        inserto=true;   
+                        inserto = true;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
             }
             return inserto;
 
