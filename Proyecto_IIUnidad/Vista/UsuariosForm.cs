@@ -21,7 +21,7 @@ namespace Vista
             InitializeComponent();
         }
         //instanciar objeto
-        UsuarioDatos userDatos= new UsuarioDatos();
+        UsuarioDatos userDatos = new UsuarioDatos();
         string tipoOperacion = "";
         Usuario user;
         private void UsuariosForm_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace Vista
         //procidimieto privdo asincrono
         private async void LlenarDataGrid()
         {
-           UsuariosdataGridView.DataSource = await userDatos.DevolverListaAsync(); 
+            UsuariosdataGridView.DataSource = await userDatos.DevolverListaAsync();
         }
 
         private void NuevoButton_Click(object sender, EventArgs e)
@@ -127,19 +127,102 @@ namespace Vista
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo Guardar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Usuario No se pudo Guardar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            else if (tipoOperacion == "Modificar")
+            {
+                if (string.IsNullOrEmpty(CodigoTextBox.Text))
+                {
+                    errorProvider1.SetError(CodigoTextBox, "Ingrese un codigo");
+                    CodigoTextBox.Focus();
+                    return;
+
+                }
+                if (string.IsNullOrEmpty(NombreTextBox.Text))
+                {
+                    errorProvider1.SetError(CodigoTextBox, "Ingrese un Nombre");
+                    NombreTextBox.Focus();
+                    return;
+
+                }
+                if (string.IsNullOrEmpty(ClaveTextBox.Text))
+                {
+                    errorProvider1.SetError(CodigoTextBox, "Ingrese una Clave");
+                    ClaveTextBox.Focus();
+                    return;
+
+                }
+                if (string.IsNullOrEmpty(RolComboBox.Text))
+                {
+                    errorProvider1.SetError(RolComboBox, "Seleccione un rol");
+                    RolComboBox.Focus();
+                    return;
+                }
+                user.Codigo = CodigoTextBox.Text;
+                user.Nombre = NombreTextBox.Text;
+                user.Clave = ClaveTextBox.Text;
+                user.Correo = CorreoTextBox.Text;
+                user.Rol = RolComboBox.Text;
+                user.EstActivo = EstaActivoCheckBox.Checked;
+
+                bool modifico = await userDatos.ActualizarAsync(user);
+                if (modifico)
+                {
+                    LlenarDataGrid();
+                    LimpiarControles();
+                    DesabilitarControles();
+                    MessageBox.Show("Usuario Guardado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario No se pudo Guardar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
 
-
-
             }
-        
         }
 
         private void ModificarButton_Click(object sender, EventArgs e)
         {
             tipoOperacion = "Modificar";
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                CodigoTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Codigo"].Value.ToString();
+                NombreTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
+                ClaveTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Clave"].Value.ToString();
+                CorreoTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Correo"].Value.ToString();
+                RolComboBox.Text = UsuariosdataGridView.CurrentRow.Cells["Rol"].Value.ToString();
+                //EstaActivoCheckBox.Checked =Convert.ToBoolean(UsuariosdataGridView.CurrentRow.Cells["EstActivo"].Value);
+                HabilitarControles();
+                CodigoTextBox.ReadOnly = true;
+            }
+            else
+            {
+                MessageBox.Show("Debe selecionar un registro", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private async void EliminarButton_Click(object sender, EventArgs e)
+        {
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                bool eliminar = await userDatos.EliminarAsync(UsuariosdataGridView.CurrentRow.Cells["Codigo"].Value.ToString());
+                if (eliminar)
+                {
+                    LlenarDataGrid();
+                    LimpiarControles();
+                    DesabilitarControles();
+                    MessageBox.Show("Usuario Eliminado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario No se pudo Eleminar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
         }
     }
 }
+

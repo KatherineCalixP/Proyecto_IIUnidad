@@ -99,12 +99,11 @@ namespace Datos
         //Actualizar
         public async Task<bool> ActualizarAsync(Usuario usuario)
         {
-            bool actulizo= false;
+            bool actualizo= false;
             try
             {
-                //va a permitir consultar el usuario y la clave
-                string sql = "UPDATE Usuario SET Nombre=@Nombre, Clave=@Clave, Correo=@Correo, Rol=@Rol, EstaAtivo=@EstActivo WHERE Codigo=@Codigo";
-                //conexion y using nos ayuda a cerrarla
+                string sql = "UPDATE usuario SET Nombre=@Nombre, Clave=@Clave, Correo=@Correo, Rol=@Rol, EstActivo=@EstActivo WHERE Codigo=@Codigo;";
+
                 using (MySqlConnection _conexion = new MySqlConnection(CadenaConexion.Cadena))
                 {
                     await _conexion.OpenAsync();
@@ -116,21 +115,17 @@ namespace Datos
                         comando.Parameters.Add("@Clave", MySqlDbType.VarChar, 120).Value = usuario.Clave;
                         comando.Parameters.Add("@Correo", MySqlDbType.VarChar, 45).Value = usuario.Correo;
                         comando.Parameters.Add("@Rol", MySqlDbType.VarChar, 20).Value = usuario.Rol;
-                        comando.Parameters.Add("@EstActivo", MySqlDbType.TinyText).Value = usuario.EstActivo;
+                        comando.Parameters.Add("@EstActivo", MySqlDbType.Bit).Value = usuario.EstActivo;
 
-                        //ejecutar
                         await comando.ExecuteNonQueryAsync();
-                        actulizo = true;
+                        actualizo = true;
                     }
                 }
-
             }
             catch (Exception)
             {
-
             }
-            return actulizo;    
-            
+            return actualizo;
         }
 
         //borrar usuario
