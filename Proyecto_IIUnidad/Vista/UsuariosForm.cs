@@ -194,7 +194,7 @@ namespace Vista
                 ClaveTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Clave"].Value.ToString();
                 CorreoTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Correo"].Value.ToString();
                 RolComboBox.Text = UsuariosdataGridView.CurrentRow.Cells["Rol"].Value.ToString();
-                //EstaActivoCheckBox.Checked =Convert.ToBoolean(UsuariosdataGridView.CurrentRow.Cells["EstActivo"].Value);
+                EstaActivoCheckBox.Checked =Convert.ToBoolean(UsuariosdataGridView.CurrentRow.Cells["EstActivo"].Value);
                 HabilitarControles();
                 CodigoTextBox.ReadOnly = true;
             }
